@@ -34,6 +34,20 @@ h3{font-weight:700;font-size:22px}
 p{margin:0}
 .lede{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:56ch}
 
+
+/* blueprint construction layer */
+.bp{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;color:var(--ink);opacity:.22}
+.bpsym *{vector-effect:non-scaling-stroke}
+.bpsym path,.bpsym rect,.bpsym circle{stroke:currentColor;stroke-width:1;fill:none}
+.bpsym .bp-faint{opacity:.6}
+.bpsym text{fill:currentColor;stroke:none;font-family:var(--mono);font-size:11px;letter-spacing:.14em}
+.bpsym .bp-dim{font-size:14px;font-weight:500}
+.bpsym .bp-sys{opacity:var(--sys,1)}
+.bp.nosys{--sys:0}
+section.ink .bp{color:var(--cream);opacity:.16}
+section > .wrap{position:relative;z-index:1}
+@media (max-width:900px){.bpsym .bp-sys{display:none}.bp{opacity:.16}section.ink .bp{opacity:.12}}
+
 /* nav */
 header.top{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--cream);border-bottom:1px solid #2E2D29}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
@@ -75,8 +89,8 @@ section.ink .label.moss{color:#9AA673}
 .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
 .hero .wrap{position:relative}
 .hero-mark{position:absolute;right:32px;top:150px;width:min(40%,440px);aspect-ratio:1;display:grid;place-items:center;pointer-events:none}
-.hero-mark::before{content:"";position:absolute;inset:0;border:1px dashed #4A4843;border-radius:50%}
-.hero-mark::after{content:"";position:absolute;left:-8%;right:-8%;top:50%;height:1px;background:#3A3935}
+.hero-mark::before{content:"";position:absolute;inset:0;border:1px dashed #A49D8F;border-radius:50%}
+.hero-mark::after{content:"";position:absolute;left:-8%;right:-8%;top:50%;height:1px;background:#C9C1B2}
 .hero-mark img{position:relative;z-index:1;width:78%;height:auto}
 .hero .lede{max-width:44ch}
 .cross{position:absolute;width:24px;height:24px}
@@ -155,6 +169,7 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol class="bpsym" id="bp-a" viewBox="0 0 1440 900"><path d="M0,160H1440M0,300H1440M0,760H1440" /><path d="M120,0V900M720,120V860M1320,120V860" class="bp-faint"/><path d="M706,300H734M720,286V314" stroke-width="1.2"/><path d="M1306,300H1334M1320,286V314" stroke-width="1.2"/><path d="M706,760H734M720,746V774" stroke-width="1.2"/><path d="M1306,760H1334M1320,746V774" stroke-width="1.2"/><path d="M760,190L1300,430" class="bp-faint"/><path d="M720,110H986.0M1054.0,110H1320M720,102V118M1320,102V118"/><text x="1020.0" y="114" text-anchor="middle" class="bp-dim">14.00</text><path d="M1380,0H1346.0M1414.0,0H1380M1380,-8V8M1380,-8V8"/><text x="1380.0" y="4" text-anchor="middle" class="bp-dim"></text><path d="M1390,300V760M1382,300H1398M1382,760H1398"/><text x="1404" y="534" class="bp-dim" transform="rotate(90 1404 534)">3.60</text><g class="bp-sys"><rect x="140" y="812" width="74" height="26" fill="none"/><text x="177.0" y="829" text-anchor="middle">INPUT</text><path d="M214,825H300" stroke-dasharray="4 5"/><rect x="300" y="812" width="86" height="26" fill="none"/><text x="343.0" y="829" text-anchor="middle">SYSTEM</text><path d="M386,825H472" stroke-dasharray="4 5"/><rect x="472" y="812" width="74" height="26" fill="none"/><text x="509.0" y="829" text-anchor="middle">OUTPUT</text></g></symbol><symbol class="bpsym" id="bp-b" viewBox="0 0 1440 900"><circle cx="40" cy="470" r="430" fill="none" class="bp-faint"/><path d="M0,120H1440M0,800H1440"/><path d="M980,60V860M1380,60V860" class="bp-faint"/><path d="M966,120H994M980,106V134" stroke-width="1.2"/><path d="M1366,120H1394M1380,106V134" stroke-width="1.2"/><path d="M966,800H994M980,786V814" stroke-width="1.2"/><path d="M1366,800H1394M1380,786V814" stroke-width="1.2"/><path d="M980,70H1146.0M1214.0,70H1380M980,62V78M1380,62V78"/><text x="1180.0" y="74" text-anchor="middle" class="bp-dim">9.80</text><g class="bp-sys"><rect x="1040" y="170" width="96" height="26" fill="none"/><text x="1088.0" y="187" text-anchor="middle">cron */30</text><rect x="1200" y="170" width="76" height="26" fill="none"/><text x="1238.0" y="187" text-anchor="middle">queue</text><rect x="1040" y="250" width="96" height="26" fill="none"/><text x="1088.0" y="267" text-anchor="middle">router</text><rect x="1200" y="250" width="76" height="26" fill="none"/><text x="1238.0" y="267" text-anchor="middle">D1</text><path d="M1136,183H1200M1238,196V250M1136,263H1200" stroke-dasharray="4 5"/><text x="1040" y="160">FIG. 2  ·  SYSTEM</text></g></symbol><symbol class="bpsym" id="bp-c" viewBox="0 0 1440 900"><circle cx="1360" cy="420" r="460" fill="none" class="bp-faint"/><path d="M0,140H1440M0,700H1440"/><path d="M80,40V880M500,40V880" class="bp-faint"/><path d="M66,140H94M80,126V154" stroke-width="1.2"/><path d="M486,140H514M500,126V154" stroke-width="1.2"/><path d="M66,700H94M80,686V714" stroke-width="1.2"/><path d="M486,700H514M500,686V714" stroke-width="1.2"/><path d="M520,860L1100,620" class="bp-faint"/><path d="M80,90H256.0M324.0,90H500M80,82V98M500,82V98"/><text x="290.0" y="94" text-anchor="middle" class="bp-dim">4.20</text><path d="M1420,180H1440"/><text x="1412" y="184" text-anchor="end">A</text><path d="M1420,320H1440"/><text x="1412" y="324" text-anchor="end">B</text><path d="M1420,460H1440"/><text x="1412" y="464" text-anchor="end">C</text><path d="M1420,600H1440"/><text x="1412" y="604" text-anchor="end">D</text><path d="M1420,740H1440"/><text x="1412" y="744" text-anchor="end">E</text><g class="bp-sys"><rect x="110" y="740" width="86" height="26" fill="none"/><text x="153.0" y="757" text-anchor="middle">SOURCE</text><path d="M196,753H262" stroke-dasharray="4 5"/><rect x="262" y="740" width="80" height="26" fill="none"/><text x="302.0" y="757" text-anchor="middle">STORE</text><path d="M302,766V812" stroke-dasharray="4 5"/><rect x="262" y="812" width="80" height="26" fill="none"/><text x="302.0" y="829" text-anchor="middle">VIEW</text><text x="110" y="730">FIG. 3  ·  DATA PATH</text></g></symbol></defs></svg>
 
 <header class="top">
   <div class="wrap">
@@ -171,14 +186,16 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 <main id="top">
 
 <!-- 1. HERO -->
-<section class="hero ink">
+<section class="hero">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  
   <span class="cross" style="right:32px;top:32px"></span>
   <div class="wrap">
     <div class="block">
       <span class="label tb">Workhorse / AI systems &amp; automation</span>
       <span class="label tb">Detail 01 · Rev. B</span>
     </div>
-    <div class="hero-mark" aria-hidden="true"><img src="workhorse-mark-cream.png" alt=""></div>
+    <div class="hero-mark" aria-hidden="true"><img src="workhorse-mark-ink.png" alt=""></div>
     <h1>Practical AI systems for repeated work.</h1>
     <p class="lede">We find the work your team repeats every week, build an AI workflow that handles it, and stay until it runs reliably.</p>
     <div class="ctas">
@@ -189,7 +206,9 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 </section>
 
 <!-- 2. PROBLEM -->
-<section>
+<section class="ink">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Detail 02 / The problem</div>
     <div class="two">
@@ -201,6 +220,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 3. METHOD -->
 <section class="ink" id="method">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Detail 03 / Method</div>
     <h2>Choose the right work. Build the system. Follow through.</h2>
@@ -215,6 +236,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 4. WHAT WE BUILD -->
 <section id="builds">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Detail 04 / What we build</div>
     <h2>Workflows that carry the load.</h2>
@@ -234,6 +257,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 5. OFFER -->
 <section class="ink" id="offer">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Section A-A / The offer</div>
     <div class="offer">
@@ -258,6 +283,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 6. PRINCIPLES -->
 <section>
+  <svg class="bp nosys" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Detail 05 / How we work</div>
     <h2>Calm, careful, and built to last.</h2>
@@ -290,6 +317,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 8. ABOUT -->
 <section>
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  
   <div class="wrap about">
     <img src="workhorse-mark-ink.png" alt="">
     <div>
@@ -303,6 +332,8 @@ footer{padding:40px 0 56px;background:var(--ink);color:var(--cream)}
 
 <!-- 9. CLOSING -->
 <section class="ink closing" id="start">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  
   <div class="wrap">
     <div class="dim label">Start</div>
     <h2>Think clearly. Work deliberately. Follow through.</h2>
