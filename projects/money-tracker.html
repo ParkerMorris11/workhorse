@@ -46,10 +46,10 @@
       <span class="label" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Detail 05 · Section C-C</span>
     </div>
     <h1>Money Tracker</h1>
-    <p class="lede">A personal iPhone spending tracker. It connects bank accounts through Plaid, keeps transactions synced on the server, and turns them into dashboards, budgets, and a heatmap of daily spending.</p>
+    <p class="lede">A personal iPhone spending tracker. It connects my bank accounts through Plaid, keeps transactions synced into a Supabase stack running on my Mac, and turns them into dashboards, budgets, and a heatmap of daily spending.</p>
     <div class="meta">
       <div><span class="label">Type</span>Personal iOS app</div>
-      <div><span class="label">Stack</span>SwiftUI, Supabase (Postgres, Edge Functions), Plaid</div>
+      <div><span class="label">Stack</span>SwiftUI, Supabase in Docker, Plaid, Ollama</div>
       <div><span class="label">Role</span>Designed and built</div>
     </div>
   </div>
@@ -61,7 +61,7 @@
     <div class="dim label">01 / The design decision</div>
     <div class="two">
       <h2>The app never talks to Plaid.</h2>
-      <p class="lede">Every Plaid call needs a secret, and anything shipped inside an iPhone app can be pulled out of it. So the app holds only its Supabase login. Server functions hold the Plaid secret and each bank's access token, which is stored encrypted with AES-GCM.</p>
+      <p class="lede">Every Plaid call needs a secret, and anything shipped inside an iPhone app can be pulled out of it. So the app holds only its Supabase login. Edge functions hold the Plaid secret and each bank's access token, which is stored encrypted with AES-GCM.</p>
     </div>
   </div>
 </section>
@@ -69,15 +69,12 @@
 <section>
   <svg class="bp nosys" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
   <div class="wrap">
-    <div class="dim label">02 / Data path</div>
-    <h2>From a bank login to a dashboard.</h2>
-    <div class="pipe">
-      <div><span class="label">01 · App</span><b>Connect a bank</b><p>plaid-link-token<br>Plaid Link opens</p></div>
-      <div><span class="label">02 · Server</span><b>Exchange</b><p>public_token → access_token<br>encrypted, AES-GCM</p></div>
-      <div><span class="label">03 · Plaid</span><b>Webhook</b><p>signature verified<br>/transactions/sync</p></div>
-      <div><span class="label">04 · Postgres</span><b>Rules + views</b><p>row-level security<br>dashboard views</p></div>
-      <div><span class="label">05 · iPhone</span><b>Dashboards</b><p>Home · budgets<br>daily heatmap</p></div>
-    </div>
+    <div class="dim label">02 / Architecture</div>
+    <h2>Everything runs on one Mac.</h2>
+    <figure class="diagram" style="margin-left:0;margin-right:0">
+      <a href="../money-tracker-architecture.png" target="_blank" rel="noopener"><img src="../money-tracker-architecture.png" alt="Money Tracker architecture: Plaid and a local Ollama model feed a Supabase stack in Docker on a Mac, with launchd jobs, a Plaid gateway of Deno edge functions, and a Postgres database with row-level security. The iPhone app, its on-device Ask tab, and terminal scripts are the clients. Supabase Auth issues JWTs, and a daily pg_dump backup goes to disk."></a>
+    </figure>
+    <p class="note">Click the diagram to open it full size.</p>
   </div>
 </section>
 
@@ -87,12 +84,12 @@
     <div class="dim label">03 / How it works</div>
     <h2>Synced, categorized, and locked down.</h2>
     <ol class="howlist">
-      <li><span class="num">01</span><h3>Three ways to stay synced</h3><p>Plaid's webhook triggers a sync when new transactions are ready. Pull to refresh asks the server to sync first. A scheduled job on my Mac syncs every bank with a job secret, not a login.</p></li>
+      <li><span class="num">01</span><h3>The Mac asks, Plaid answers</h3><p>Plaid's webhooks can't reach a laptop, so a launchd job calls <code>plaid-sync-all</code> every 3 hours with a job secret, not a login. Pull to refresh syncs on demand. A run missed while the Mac sleeps fires on wake.</p></li>
       <li><span class="num">02</span><h3>Security rules, tested</h3><p>Postgres row-level security keeps each user to their own rows. The app can change only <code>user_category</code> on a transaction. pgTAP tests cover the rules and the views.</p></li>
       <li><span class="num">03</span><h3>Dashboard-ready views</h3><p>The app reads views, not raw tables: <code>spending_transactions</code>, <code>daily_spending</code>, <code>monthly_category_spending</code>, and <code>budget_progress</code>.</p></li>
-      <li><span class="num">04</span><h3>Local AI categories</h3><p>Merchant rules run first. A model running in Ollama on my Mac (<code>gemma4:e4b</code>) suggests categories for the rest. Nothing is sent to a cloud AI.</p></li>
-      <li><span class="num">05</span><h3>Ask, on the phone</h3><p>On iOS 26, Ask is a chat with Apple's on-device model. Its tools read my own spending data from Supabase, and the chat stays on the phone.</p></li>
-      <li><span class="num">06</span><h3>Locked on launch</h3><p>Sign in with Apple or email through Supabase Auth, with the session in the Keychain. The app locks with Face ID on launch, with a passcode fallback.</p></li>
+      <li><span class="num">04</span><h3>Local AI categories</h3><p>Merchant rules run first. An optional hourly job asks <code>gemma4:e4b</code> in Ollama, on <code>127.0.0.1</code> only, to suggest categories, using my past labels as examples. Nothing is sent to a cloud AI.</p></li>
+      <li><span class="num">05</span><h3>Ask, on the phone</h3><p>On iOS 26, Ask is a chat with Apple's on-device model. Its tools fetch rows, Swift does the math, and questions stay on the phone.</p></li>
+      <li><span class="num">06</span><h3>Locked and backed up</h3><p>Email sign-in through Supabase Auth, with the session in the Keychain and Face ID on launch. A daily <code>pg_dump</code> goes to <code>~/Backups</code>, newest 14 kept, readable only by me.</p></li>
     </ol>
   </div>
 </section>
