@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workhorse · Practical AI systems for repeated work</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<meta property="og:title" content="Workhorse · Practical AI systems for repeated work">
+<meta property="og:description" content="Workhorse designs and builds practical AI workflows that take repeated work off your plate and run reliably.">
+<meta property="og:image" content="https://parkermorris11.github.io/workhorse/og-image.png">
+<meta name="theme-color" content="#111110">
+<meta name="description" content="Workhorse designs and builds practical AI workflows that take repeated work off your plate and run reliably.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111110; --cream:#F4EFE7; --moss:#4F5A35; --moss-tint:#E9E8D9;
+  --muted:#55524C; --line:#D9D1C2; --grid:#E4DDD0;
+  --sans:'Archivo','Inter',Arial,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:18px;line-height:1.55;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:40px 40px}
+a{color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px}
+.label{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.label.moss{color:var(--moss)}
+h1,h2,h3{margin:0;line-height:1.08}
+h1{font-weight:800;font-size:clamp(40px,6.4vw,76px);letter-spacing:-.02em;max-width:14ch}
+h2{font-weight:800;font-size:clamp(30px,4vw,46px);letter-spacing:-.01em;max-width:20ch}
+h3{font-weight:700;font-size:22px}
+p{margin:0}
+.lede{font-size:clamp(18px,2vw,21px);color:var(--muted);max-width:56ch}
+
+/* nav */
+header.top{position:sticky;top:0;z-index:5;background:var(--cream);border-bottom:1px solid var(--ink)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+header.top img{height:26px;display:block}
+nav{display:flex;gap:28px;align-items:center}
+nav a{text-decoration:none;font-family:var(--mono);font-size:13px;letter-spacing:.12em;text-transform:uppercase}
+nav a:hover{color:var(--moss)}
+.btn{display:inline-block;background:var(--moss);color:var(--cream);text-decoration:none;font-weight:600;font-size:16px;
+  padding:14px 22px;border:1px solid var(--moss)}
+.btn:hover{background:#3E4728}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+.btn.small{padding:10px 16px;font-size:14px}
+
+/* sections */
+section{padding:104px 0;border-bottom:1px solid var(--ink);position:relative}
+section.ink{background:var(--ink);color:var(--cream)}
+section.ink .lede,section.ink .muted{color:#CFC8BB}
+section.ink .label.moss{color:#9AA673}
+.dim{display:flex;align-items:center;gap:14px;margin-bottom:28px}
+.dim::before{content:"";width:28px;height:1px;background:currentColor}
+.dim::after{content:"";flex:1;height:1px;background:currentColor;opacity:.35}
+.muted{color:var(--muted)}
+
+/* hero */
+.hero{padding:96px 0 112px}
+.hero .block{display:flex;justify-content:space-between;gap:24px;margin-bottom:56px}
+.hero .tb{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0}
+.hero .lede{margin:28px 0 40px}
+.hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+.cross{position:absolute;width:24px;height:24px}
+.cross::before,.cross::after{content:"";position:absolute;background:var(--ink)}
+.cross::before{left:11px;top:0;width:1.2px;height:24px}.cross::after{top:11px;left:0;height:1.2px;width:24px}
+
+/* problem */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+
+/* method */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink);margin-top:48px;background:var(--cream)}
+.step{padding:28px 24px 32px;border-right:1px solid var(--ink)}
+.step:last-child{border-right:0}
+.step .num{font-family:var(--mono);font-size:13px;color:var(--moss);letter-spacing:.14em;display:block;margin-bottom:28px}
+.step h3{margin-bottom:10px}
+.step p{color:var(--muted);font-size:16px}
+
+/* builds */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:48px}
+.card{border:1px solid var(--ink);background:var(--cream);padding:26px 26px 28px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px;font-family:var(--mono);font-size:13px}
+.flow span{border:1px solid var(--ink);padding:5px 9px}
+.flow span.out{border-color:var(--moss);background:var(--moss-tint)}
+.flow i{font-style:normal;color:var(--muted)}
+.note{margin-top:20px;font-size:15px;color:var(--muted)}
+
+/* offer */
+.offer{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;margin-top:8px}
+.spec{border:1px solid #CFC8BB;padding:28px}
+.spec ul{list-style:none;margin:16px 0 0;padding:0}
+.spec li{padding:12px 0 12px 28px;border-top:1px solid #3a3a37;position:relative}
+.spec li::before{content:"";position:absolute;left:0;top:19px;width:12px;height:12px;background:#9AA673}
+.spec .rev{font-family:var(--mono);font-size:12px;letter-spacing:.12em;color:#9AA673;margin-left:6px}
+
+/* principles */
+.prin{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--ink);margin-top:48px}
+.prin div{padding:28px 28px 0 0}
+.prin h3{margin-bottom:10px}
+.prin p{color:var(--muted);font-size:16px}
+
+/* proof */
+.diagram{margin-top:48px;border:1px solid var(--ink);background:var(--cream)}
+.diagram img{display:block;width:100%;height:auto}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.facts div{border-top:2px solid var(--moss);padding-top:12px;font-size:16px}
+
+/* about + closing */
+.about{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:start}
+.about img{width:120px}
+.closing{text-align:left}
+.closing .lede{margin:24px 0 36px}
+footer{padding:40px 0 56px}
+.sig{display:flex;align-items:center;gap:20px;justify-content:center;font-family:var(--mono);font-size:14px;letter-spacing:.16em}
+.sig::before,.sig::after{content:"";width:96px;height:2px;background:var(--moss)}
+
+@media (max-width:900px){
+  nav a:not(.btn){display:none}
+  .two,.offer,.about{grid-template-columns:1fr;gap:32px}
+  .steps{grid-template-columns:1fr 1fr}
+  .step:nth-child(2){border-right:0}
+  .step:nth-child(-n+2){border-bottom:1px solid var(--ink)}
+  .cards,.prin,.facts{grid-template-columns:1fr}
+  .diagram{overflow-x:auto}.diagram img{min-width:820px}
+}
+@media (max-width:560px){
+  .wrap{padding:0 16px}
+  section{padding:72px 0}
+  .steps{grid-template-columns:1fr}
+  .step{border-right:0;border-bottom:1px solid var(--ink)}
+  .step:last-child{border-bottom:0}
+  .hero .block{flex-direction:column}
+  .sig::before,.sig::after{width:32px}
+  .sig{font-size:12px;letter-spacing:.1em}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a href="#top" aria-label="Workhorse home"><img src="workhorse-lockup-ink.png" alt="Workhorse"></a>
+    <nav>
+      <a href="#method">How it works</a>
+      <a href="#builds">What we build</a>
+      <a href="#proof">Proof</a>
+      <a class="btn small" href="#start">Book a teardown</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- 1. HERO -->
+<section class="hero">
+  <span class="cross" style="right:32px;top:32px"></span>
+  <div class="wrap">
+    <div class="block">
+      <span class="label tb">Workhorse / AI systems &amp; automation</span>
+      <span class="label tb">Detail 01 · Rev. B</span>
+    </div>
+    <h1>Practical AI systems for repeated work.</h1>
+    <p class="lede">We find the work your team repeats every week, build an AI workflow that handles it, and stay until it runs reliably.</p>
+    <div class="ctas">
+      <a class="btn" href="#start">Book a workflow teardown</a>
+      <a class="btn ghost" href="#method">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. PROBLEM -->
+<section>
+  <div class="wrap">
+    <div class="dim label">Detail 02 / The problem</div>
+    <div class="two">
+      <h2>The same work, every week.</h2>
+      <p class="lede">Copying details between tools. Answering the same questions. Building the same report. None of it is hard, but all of it takes time, and it slips when things get busy. AI can carry this kind of work, if the system around it is built carefully.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 3. METHOD -->
+<section id="method">
+  <div class="wrap">
+    <div class="dim label">Detail 03 / Method</div>
+    <h2>Choose the right work. Build the system. Follow through.</h2>
+    <div class="steps">
+      <div class="step"><span class="num">01 / Choose</span><h3>Pick the workflow</h3><p>We map how the work happens today and pick the one workflow most worth automating.</p></div>
+      <div class="step"><span class="num">02 / Build</span><h3>Build the system</h3><p>We design and build it, with checkpoints where a person should decide.</p></div>
+      <div class="step"><span class="num">03 / Test</span><h3>Prove it on real cases</h3><p>We run it on real examples until it handles the normal cases and flags the odd ones.</p></div>
+      <div class="step"><span class="num">04 / Follow through</span><h3>Hand off and check back</h3><p>We document it, hand it off, and check back after it has been in real use.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. WHAT WE BUILD -->
+<section id="builds">
+  <div class="wrap">
+    <div class="dim label">Detail 04 / What we build</div>
+    <h2>Workflows that carry the load.</h2>
+    <div class="cards">
+      <div class="card"><h3>Inquiry triage</h3><p class="muted">New requests get summarized, a reply gets drafted, and the right person is notified.</p>
+        <div class="flow"><span>Inbox / form</span><i>→</i><span>AI summary + draft</span><i>→</i><span class="out">Routed to owner</span></div></div>
+      <div class="card"><h3>Meeting follow-through</h3><p class="muted">Notes become action items, and action items become tasks with owners.</p>
+        <div class="flow"><span>Meeting notes</span><i>→</i><span>Action items</span><i>→</i><span class="out">Tasks created</span></div></div>
+      <div class="card"><h3>Weekly reporting</h3><p class="muted">Numbers from a few tools come together into one plain-language summary.</p>
+        <div class="flow"><span>2–3 tools</span><i>→</i><span>Combined data</span><i>→</i><span class="out">Weekly summary</span></div></div>
+      <div class="card"><h3>Intake to records</h3><p class="muted">Messy emails and forms turn into clean, structured records.</p>
+        <div class="flow"><span>Email / form</span><i>→</i><span>Fields extracted</span><i>→</i><span class="out">Sheet or CRM row</span></div></div>
+    </div>
+    <p class="note" style="margin-top:20px">These are examples of the kind of work we build. Ask about yours.</p>
+  </div>
+</section>
+
+<!-- 5. OFFER -->
+<section class="ink" id="offer">
+  <div class="wrap">
+    <div class="dim label">Section A-A / The offer</div>
+    <div class="offer">
+      <div>
+        <h2>One workflow. Fixed scope. Built for the long haul.</h2>
+        <p class="lede" style="margin:24px 0 32px">Every engagement starts with a free 30-minute teardown. If there's a good fit, we build one workflow end to end for a fixed price, test it, document it, and check back after launch.</p>
+        <a class="btn" href="#start">Book a workflow teardown</a>
+      </div>
+      <div class="spec">
+        <span class="label moss">What's included</span>
+        <ul>
+          <li>Workflow map</li>
+          <li>Working build</li>
+          <li>Test run on real cases</li>
+          <li>Handoff guide</li>
+          <li>Follow-up check-in <span class="rev">REV. B</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. PRINCIPLES -->
+<section>
+  <div class="wrap">
+    <div class="dim label">Detail 05 / How we work</div>
+    <h2>Calm, careful, and built to last.</h2>
+    <div class="prin">
+      <div><h3>Useful over impressive.</h3><p>We build what saves time, not what demos well.</p></div>
+      <div><h3>People stay in control.</h3><p>Automation handles the routine, and judgment stays with you.</p></div>
+      <div><h3>Done means it runs.</h3><p>A workflow isn't finished until it works on real cases.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7. PROOF: SCHOOL OS -->
+<section id="proof">
+  <div class="wrap">
+    <div class="dim label">Detail 06 / From the workshop</div>
+    <div class="two">
+      <h2>School OS: the method, applied to my own semester.</h2>
+      <p class="lede">School OS is a system I built for my BYU courses. A Cloudflare Worker syncs Canvas and my lecture notes into a D1 database, and the same authenticated API serves a React dashboard, a Tauri desktop app, and ChatGPT over MCP. It has read-only access to Canvas, and submissions stay manual.</p>
+    </div>
+    <figure class="diagram" style="margin-left:0;margin-right:0">
+      <a href="school-os-architecture.png" target="_blank" rel="noopener"><img src="school-os-architecture.png" alt="School OS architecture: BYU Canvas and a local notes vault feed a Cloudflare Worker (SyncService on a 30-minute cron and queue, a JWT-verified fetch router) backed by a D1 database. A dashboard Worker, a Tauri desktop app, and ChatGPT over MCP read from it, with Auth0 issuing RS256 tokens."></a>
+    </figure>
+    <div class="facts">
+      <div><b>Cloudflare Workers + D1.</b> A cron-triggered SyncService runs every 30 minutes through a queue, one run per course, with 3 retries.</div>
+      <div><b>Auth on every request.</b> Auth0 issues RS256 JWTs, and the router verifies each one with jose against the JWKS.</div>
+      <div><b>Snapshot publishing.</b> Each sync writes a full run, then flips published_run, so readers never see a half-finished sync.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. ABOUT -->
+<section>
+  <div class="wrap about">
+    <img src="workhorse-mark-ink.png" alt="">
+    <div>
+      <!-- Draft: rewrite in your own words. Only add experience you can back up. -->
+      <div class="dim label">Detail 07 / Who's behind it</div>
+      <h2 style="margin-bottom:20px">Parker Morris</h2>
+      <p class="lede">I'm an Information Systems student at BYU who designs and builds AI systems and automations, including School OS above.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 9. CLOSING -->
+<section class="ink closing" id="start">
+  <div class="wrap">
+    <div class="dim label">Start</div>
+    <h2>Think clearly. Work deliberately. Follow through.</h2>
+    <p class="lede">Tell me about the work you repeat every week. In 30 minutes we'll map it and pick the one piece worth automating first.</p>
+    <!-- Replace href with your booking link (Calendly, Cal.com) or a mailto: address. -->
+    <a class="btn" href="#">Book a workflow teardown</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap"><p class="sig">PARKER MORRIS / BUILT FOR THE LONG HAUL</p></div>
+</footer>
+
+</body>
+</html>
