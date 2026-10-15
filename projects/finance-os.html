@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Money Tracker · Workhorse</title>
+<title>Finance OS · Workhorse</title>
 <link rel="icon" type="image/png" href="../favicon.png">
 <meta name="description" content="A personal iPhone spending tracker built on SwiftUI, Supabase, and Plaid, with local AI categorization.">
-<meta property="og:title" content="Money Tracker · Workhorse">
+<meta property="og:title" content="Finance OS · Workhorse">
 <meta property="og:description" content="A personal iPhone spending tracker built on SwiftUI, Supabase, and Plaid, with local AI categorization.">
 <meta property="og:image" content="https://parkermorris11.github.io/workhorse/og-image.png">
 <meta name="theme-color" content="#111110">
@@ -27,7 +27,7 @@
         <summary>Projects</summary>
         <div class="dd-menu">
           <a href="../projects/school-os.html"><b>School OS <small>01</small></b><span>Canvas and lecture notes, synced into one dashboard, desktop app, and ChatGPT.</span></a>
-          <a href="../projects/money-tracker.html" class="on"><b>Money Tracker <small>02</small></b><span>A personal iPhone spending tracker on Supabase and Plaid.</span></a>
+          <a href="../projects/finance-os.html" class="on"><b>Finance OS <small>02</small></b><span>A personal iPhone spending tracker on Supabase and Plaid.</span></a>
         </div>
       </details>
       <a class="btn small" href="../index.html#start">Book a teardown</a>
@@ -45,7 +45,7 @@
       <a class="crumb label" href="../index.html" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Projects / 02</a>
       <span class="label" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Detail 05 · Section C-C</span>
     </div>
-    <h1>Money Tracker</h1>
+    <h1>Finance OS</h1>
     <p class="lede">A personal iPhone spending tracker. It connects my bank accounts through Plaid, keeps transactions synced into a Supabase stack running on my Mac, and turns them into dashboards, budgets, and a heatmap of daily spending.</p>
     <div class="meta">
       <div><span class="label">Type</span>Personal iOS app</div>
@@ -72,7 +72,7 @@
     <div class="dim label">02 / Architecture</div>
     <h2>Everything runs on one Mac.</h2>
     <figure class="diagram" style="margin-left:0;margin-right:0">
-      <a href="../money-tracker-architecture.png" target="_blank" rel="noopener"><img src="../money-tracker-architecture.png" alt="Money Tracker architecture: Plaid and a local Ollama model feed a Supabase stack in Docker on a Mac, with launchd jobs, a Plaid gateway of Deno edge functions, and a Postgres database with row-level security. The iPhone app, its on-device Ask tab, and terminal scripts are the clients. Supabase Auth issues JWTs, and a daily pg_dump backup goes to disk."></a>
+      <a href="../finance-os-architecture.png" target="_blank" rel="noopener"><img src="../finance-os-architecture.png" alt="Finance OS architecture: Plaid and a local Ollama model feed a Supabase stack in Docker on a Mac, with launchd jobs, a Plaid gateway of Deno edge functions, and a Postgres database with row-level security. The iPhone app, its on-device Ask tab, and terminal scripts are the clients. Supabase Auth issues JWTs, and a daily pg_dump backup goes to disk."></a>
     </figure>
     <p class="note">Click the diagram to open it full size.</p>
   </div>
