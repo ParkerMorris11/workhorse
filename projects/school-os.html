@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>School OS · Workhorse</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="School OS syncs Canvas and lecture notes into one Cloudflare D1 database and serves a dashboard, a desktop app, and ChatGPT over MCP.">
+<meta property="og:title" content="School OS · Workhorse">
+<meta property="og:description" content="School OS syncs Canvas and lecture notes into one Cloudflare D1 database and serves a dashboard, a desktop app, and ChatGPT over MCP.">
+<meta property="og:image" content="https://parkermorris11.github.io/workhorse/og-image.png">
+<meta name="theme-color" content="#111110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol class="bpsym" id="bp-a" viewBox="0 0 1440 900"><path d="M0,160H1440M0,300H1440M0,760H1440" /><path d="M120,0V900M720,120V860M1320,120V860" class="bp-faint"/><path d="M706,300H734M720,286V314" stroke-width="1.2"/><path d="M1306,300H1334M1320,286V314" stroke-width="1.2"/><path d="M706,760H734M720,746V774" stroke-width="1.2"/><path d="M1306,760H1334M1320,746V774" stroke-width="1.2"/><path d="M760,190L1300,430" class="bp-faint"/><path d="M720,110H986.0M1054.0,110H1320M720,102V118M1320,102V118"/><text x="1020.0" y="114" text-anchor="middle" class="bp-dim">14.00</text><path d="M1380,0H1346.0M1414.0,0H1380M1380,-8V8M1380,-8V8"/><text x="1380.0" y="4" text-anchor="middle" class="bp-dim"></text><path d="M1390,300V760M1382,300H1398M1382,760H1398"/><text x="1404" y="534" class="bp-dim" transform="rotate(90 1404 534)">3.60</text><g class="bp-sys"><rect x="140" y="812" width="74" height="26" fill="none"/><text x="177.0" y="829" text-anchor="middle">INPUT</text><path d="M214,825H300" stroke-dasharray="4 5"/><rect x="300" y="812" width="86" height="26" fill="none"/><text x="343.0" y="829" text-anchor="middle">SYSTEM</text><path d="M386,825H472" stroke-dasharray="4 5"/><rect x="472" y="812" width="74" height="26" fill="none"/><text x="509.0" y="829" text-anchor="middle">OUTPUT</text></g></symbol><symbol class="bpsym" id="bp-b" viewBox="0 0 1440 900"><circle cx="40" cy="470" r="430" fill="none" class="bp-faint"/><path d="M0,120H1440M0,800H1440"/><path d="M980,60V860M1380,60V860" class="bp-faint"/><path d="M966,120H994M980,106V134" stroke-width="1.2"/><path d="M1366,120H1394M1380,106V134" stroke-width="1.2"/><path d="M966,800H994M980,786V814" stroke-width="1.2"/><path d="M1366,800H1394M1380,786V814" stroke-width="1.2"/><path d="M980,70H1146.0M1214.0,70H1380M980,62V78M1380,62V78"/><text x="1180.0" y="74" text-anchor="middle" class="bp-dim">9.80</text><g class="bp-sys"><rect x="1040" y="170" width="96" height="26" fill="none"/><text x="1088.0" y="187" text-anchor="middle">cron */30</text><rect x="1200" y="170" width="76" height="26" fill="none"/><text x="1238.0" y="187" text-anchor="middle">queue</text><rect x="1040" y="250" width="96" height="26" fill="none"/><text x="1088.0" y="267" text-anchor="middle">router</text><rect x="1200" y="250" width="76" height="26" fill="none"/><text x="1238.0" y="267" text-anchor="middle">D1</text><path d="M1136,183H1200M1238,196V250M1136,263H1200" stroke-dasharray="4 5"/><text x="1040" y="160">FIG. 2  ·  SYSTEM</text></g></symbol><symbol class="bpsym" id="bp-c" viewBox="0 0 1440 900"><circle cx="1360" cy="420" r="460" fill="none" class="bp-faint"/><path d="M0,140H1440M0,700H1440"/><path d="M80,40V880M500,40V880" class="bp-faint"/><path d="M66,140H94M80,126V154" stroke-width="1.2"/><path d="M486,140H514M500,126V154" stroke-width="1.2"/><path d="M66,700H94M80,686V714" stroke-width="1.2"/><path d="M486,700H514M500,686V714" stroke-width="1.2"/><path d="M520,860L1100,620" class="bp-faint"/><path d="M80,90H256.0M324.0,90H500M80,82V98M500,82V98"/><text x="290.0" y="94" text-anchor="middle" class="bp-dim">4.20</text><path d="M1420,180H1440"/><text x="1412" y="184" text-anchor="end">A</text><path d="M1420,320H1440"/><text x="1412" y="324" text-anchor="end">B</text><path d="M1420,460H1440"/><text x="1412" y="464" text-anchor="end">C</text><path d="M1420,600H1440"/><text x="1412" y="604" text-anchor="end">D</text><path d="M1420,740H1440"/><text x="1412" y="744" text-anchor="end">E</text><g class="bp-sys"><rect x="110" y="740" width="86" height="26" fill="none"/><text x="153.0" y="757" text-anchor="middle">SOURCE</text><path d="M196,753H262" stroke-dasharray="4 5"/><rect x="262" y="740" width="80" height="26" fill="none"/><text x="302.0" y="757" text-anchor="middle">STORE</text><path d="M302,766V812" stroke-dasharray="4 5"/><rect x="262" y="812" width="80" height="26" fill="none"/><text x="302.0" y="829" text-anchor="middle">VIEW</text><text x="110" y="730">FIG. 3  ·  DATA PATH</text></g></symbol></defs></svg>
+
+<header class="top">
+  <div class="wrap">
+    <a href="../index.html" aria-label="Workhorse home"><img src="../workhorse-lockup-cream.png" alt="Workhorse"></a>
+    <nav>
+      <a href="../index.html#method">How it works</a>
+      <a href="../index.html#builds">What we build</a>
+      <details class="dd on">
+        <summary>Projects</summary>
+        <div class="dd-menu">
+          <a href="../projects/school-os.html" class="on"><b>School OS <small>01</small></b><span>Canvas and lecture notes, synced into one dashboard, desktop app, and ChatGPT.</span></a>
+          <a href="../projects/money-tracker.html"><b>Money Tracker <small>02</small></b><span>A personal iPhone spending tracker on Supabase and Plaid.</span></a>
+        </div>
+      </details>
+      <a class="btn small" href="../index.html#start">Book a teardown</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="proj-hero">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  <span class="cross" style="right:32px;top:32px"></span>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;gap:24px;margin-bottom:56px;flex-wrap:wrap">
+      <a class="crumb label" href="../index.html#proof" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Projects / 01</a>
+      <span class="label" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Detail 04 · Section B-B</span>
+    </div>
+    <h1>School OS</h1>
+    <p class="lede">A system I built for my own BYU semester. It syncs Canvas and my lecture notes into one database, then serves the same data to a web dashboard, a desktop app, and ChatGPT.</p>
+    <div class="meta">
+      <div><span class="label">Status</span>Piloted on 4 BYU courses</div>
+      <div><span class="label">Stack</span>Cloudflare Workers, D1, Auth0, React, Tauri, MCP</div>
+      <div><span class="label">Role</span>Designed and built</div>
+    </div>
+  </div>
+</section>
+
+<section class="ink">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  <div class="wrap">
+    <div class="dim label">01 / The problem</div>
+    <div class="two">
+      <h2>The semester lives in too many places.</h2>
+      <p class="lede">Assignments, due dates, and grades are in Canvas. Lecture notes and transcripts are in a folder on my Mac. Keeping up with both, for every course, is repeated work. School OS pulls them into one place on a schedule.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <svg class="bp nosys" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  <div class="wrap">
+    <div class="dim label">02 / Architecture</div>
+    <h2>One API, three clients.</h2>
+    <figure class="diagram" style="margin-left:0;margin-right:0">
+      <a href="../school-os-architecture.png" target="_blank" rel="noopener"><img src="../school-os-architecture.png" alt="School OS architecture: BYU Canvas and a local notes vault feed a Cloudflare Worker (SyncService on a 30-minute cron and queue, a JWT-verified fetch router) backed by a D1 database. A dashboard Worker, a Tauri desktop app, and ChatGPT over MCP read from it, with Auth0 issuing RS256 tokens."></a>
+    </figure>
+    <p class="note">Click the diagram to open it full size.</p>
+  </div>
+</section>
+
+<section class="ink">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  <div class="wrap">
+    <div class="dim label">03 / How it works</div>
+    <h2>From Canvas to one screen.</h2>
+    <ol class="howlist">
+      <li><span class="num">01</span><h3>Scheduled Canvas sync</h3><p>A cron trigger (<code>*/30 * * * *</code>) queues a SyncService run for each pilot course. One run per course at a time, batch size 1, up to 3 retries. Canvas is read with a read-only token.</p></li>
+      <li><span class="num">02</span><h3>Notes from the Mac</h3><p>A launchd job runs <code>vault-sync.mjs</code> every 30 minutes and uploads only the Markdown notes that changed. Its API key is read from the macOS Keychain.</p></li>
+      <li><span class="num">03</span><h3>Snapshot publishing</h3><p>Each sync writes a complete run into D1, then sets <code>published_run</code> for the course. Readers only ever see a finished snapshot, never a half-written one.</p></li>
+      <li><span class="num">04</span><h3>One authenticated API</h3><p>A single Worker router serves <code>/api/tools</code>, <code>/api/vault/upload</code>, and <code>/mcp</code>. Every request carries an Auth0 RS256 token, verified with jose against the JWKS.</p></li>
+      <li><span class="num">05</span><h3>Three ways to read it</h3><p>A React dashboard (Today, Due, Grades, Tests, Settings), a Tauri desktop app behind Touch ID, and a ChatGPT connector over MCP.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <svg class="bp nosys" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  <div class="wrap">
+    <div class="dim label">04 / Guardrails</div>
+    <h2>People stay in control.</h2>
+    <div class="guard">
+      <div><h3>Read-only Canvas.</h3><p>The Canvas token can read, not write. School OS never changes anything in a course.</p></div>
+      <div><h3>Submissions stay manual.</h3><p>It shows what's due. Turning work in is still done by me, in Canvas.</p></div>
+      <div><h3>Nothing runs until you press send.</h3><p>Dashboard links open a prefilled ChatGPT prompt. It waits for me to send it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ink closing">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  <div class="wrap">
+    <div class="dim label">Next</div>
+    <div class="nextp">
+      <div><span class="label moss">Projects / 02</span><br><a class="big" href="money-tracker.html">Money Tracker →</a></div>
+      <a class="btn" href="../index.html#start">Book a workflow teardown</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap"><p class="sig">PARKER MORRIS / BUILT FOR THE LONG HAUL</p></div>
+</footer>
+<script>
+document.addEventListener('click',e=>{document.querySelectorAll('details.dd[open]').forEach(d=>{if(!d.contains(e.target))d.removeAttribute('open')})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('details.dd[open]').forEach(d=>d.removeAttribute('open'))});
+</script>
+</body>
+</html>

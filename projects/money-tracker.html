@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Money Tracker · Workhorse</title>
+<link rel="icon" type="image/png" href="../favicon.png">
+<meta name="description" content="A personal iPhone spending tracker built on SwiftUI, Supabase, and Plaid, with local AI categorization.">
+<meta property="og:title" content="Money Tracker · Workhorse">
+<meta property="og:description" content="A personal iPhone spending tracker built on SwiftUI, Supabase, and Plaid, with local AI categorization.">
+<meta property="og:image" content="https://parkermorris11.github.io/workhorse/og-image.png">
+<meta name="theme-color" content="#111110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol class="bpsym" id="bp-a" viewBox="0 0 1440 900"><path d="M0,160H1440M0,300H1440M0,760H1440" /><path d="M120,0V900M720,120V860M1320,120V860" class="bp-faint"/><path d="M706,300H734M720,286V314" stroke-width="1.2"/><path d="M1306,300H1334M1320,286V314" stroke-width="1.2"/><path d="M706,760H734M720,746V774" stroke-width="1.2"/><path d="M1306,760H1334M1320,746V774" stroke-width="1.2"/><path d="M760,190L1300,430" class="bp-faint"/><path d="M720,110H986.0M1054.0,110H1320M720,102V118M1320,102V118"/><text x="1020.0" y="114" text-anchor="middle" class="bp-dim">14.00</text><path d="M1380,0H1346.0M1414.0,0H1380M1380,-8V8M1380,-8V8"/><text x="1380.0" y="4" text-anchor="middle" class="bp-dim"></text><path d="M1390,300V760M1382,300H1398M1382,760H1398"/><text x="1404" y="534" class="bp-dim" transform="rotate(90 1404 534)">3.60</text><g class="bp-sys"><rect x="140" y="812" width="74" height="26" fill="none"/><text x="177.0" y="829" text-anchor="middle">INPUT</text><path d="M214,825H300" stroke-dasharray="4 5"/><rect x="300" y="812" width="86" height="26" fill="none"/><text x="343.0" y="829" text-anchor="middle">SYSTEM</text><path d="M386,825H472" stroke-dasharray="4 5"/><rect x="472" y="812" width="74" height="26" fill="none"/><text x="509.0" y="829" text-anchor="middle">OUTPUT</text></g></symbol><symbol class="bpsym" id="bp-b" viewBox="0 0 1440 900"><circle cx="40" cy="470" r="430" fill="none" class="bp-faint"/><path d="M0,120H1440M0,800H1440"/><path d="M980,60V860M1380,60V860" class="bp-faint"/><path d="M966,120H994M980,106V134" stroke-width="1.2"/><path d="M1366,120H1394M1380,106V134" stroke-width="1.2"/><path d="M966,800H994M980,786V814" stroke-width="1.2"/><path d="M1366,800H1394M1380,786V814" stroke-width="1.2"/><path d="M980,70H1146.0M1214.0,70H1380M980,62V78M1380,62V78"/><text x="1180.0" y="74" text-anchor="middle" class="bp-dim">9.80</text><g class="bp-sys"><rect x="1040" y="170" width="96" height="26" fill="none"/><text x="1088.0" y="187" text-anchor="middle">cron */30</text><rect x="1200" y="170" width="76" height="26" fill="none"/><text x="1238.0" y="187" text-anchor="middle">queue</text><rect x="1040" y="250" width="96" height="26" fill="none"/><text x="1088.0" y="267" text-anchor="middle">router</text><rect x="1200" y="250" width="76" height="26" fill="none"/><text x="1238.0" y="267" text-anchor="middle">D1</text><path d="M1136,183H1200M1238,196V250M1136,263H1200" stroke-dasharray="4 5"/><text x="1040" y="160">FIG. 2  ·  SYSTEM</text></g></symbol><symbol class="bpsym" id="bp-c" viewBox="0 0 1440 900"><circle cx="1360" cy="420" r="460" fill="none" class="bp-faint"/><path d="M0,140H1440M0,700H1440"/><path d="M80,40V880M500,40V880" class="bp-faint"/><path d="M66,140H94M80,126V154" stroke-width="1.2"/><path d="M486,140H514M500,126V154" stroke-width="1.2"/><path d="M66,700H94M80,686V714" stroke-width="1.2"/><path d="M486,700H514M500,686V714" stroke-width="1.2"/><path d="M520,860L1100,620" class="bp-faint"/><path d="M80,90H256.0M324.0,90H500M80,82V98M500,82V98"/><text x="290.0" y="94" text-anchor="middle" class="bp-dim">4.20</text><path d="M1420,180H1440"/><text x="1412" y="184" text-anchor="end">A</text><path d="M1420,320H1440"/><text x="1412" y="324" text-anchor="end">B</text><path d="M1420,460H1440"/><text x="1412" y="464" text-anchor="end">C</text><path d="M1420,600H1440"/><text x="1412" y="604" text-anchor="end">D</text><path d="M1420,740H1440"/><text x="1412" y="744" text-anchor="end">E</text><g class="bp-sys"><rect x="110" y="740" width="86" height="26" fill="none"/><text x="153.0" y="757" text-anchor="middle">SOURCE</text><path d="M196,753H262" stroke-dasharray="4 5"/><rect x="262" y="740" width="80" height="26" fill="none"/><text x="302.0" y="757" text-anchor="middle">STORE</text><path d="M302,766V812" stroke-dasharray="4 5"/><rect x="262" y="812" width="80" height="26" fill="none"/><text x="302.0" y="829" text-anchor="middle">VIEW</text><text x="110" y="730">FIG. 3  ·  DATA PATH</text></g></symbol></defs></svg>
+
+<header class="top">
+  <div class="wrap">
+    <a href="../index.html" aria-label="Workhorse home"><img src="../workhorse-lockup-cream.png" alt="Workhorse"></a>
+    <nav>
+      <a href="../index.html#method">How it works</a>
+      <a href="../index.html#builds">What we build</a>
+      <details class="dd on">
+        <summary>Projects</summary>
+        <div class="dd-menu">
+          <a href="../projects/school-os.html"><b>School OS <small>01</small></b><span>Canvas and lecture notes, synced into one dashboard, desktop app, and ChatGPT.</span></a>
+          <a href="../projects/money-tracker.html" class="on"><b>Money Tracker <small>02</small></b><span>A personal iPhone spending tracker on Supabase and Plaid.</span></a>
+        </div>
+      </details>
+      <a class="btn small" href="../index.html#start">Book a teardown</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="proj-hero">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  <span class="cross" style="right:32px;top:32px"></span>
+  <div class="wrap">
+    <div style="display:flex;justify-content:space-between;gap:24px;margin-bottom:56px;flex-wrap:wrap">
+      <a class="crumb label" href="../index.html" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Projects / 02</a>
+      <span class="label" style="border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:8px 0">Detail 05 · Section C-C</span>
+    </div>
+    <h1>Money Tracker</h1>
+    <p class="lede">A personal iPhone spending tracker. It connects bank accounts through Plaid, keeps transactions synced on the server, and turns them into dashboards, budgets, and a heatmap of daily spending.</p>
+    <div class="meta">
+      <div><span class="label">Type</span>Personal iOS app</div>
+      <div><span class="label">Stack</span>SwiftUI, Supabase (Postgres, Edge Functions), Plaid</div>
+      <div><span class="label">Role</span>Designed and built</div>
+    </div>
+  </div>
+</section>
+
+<section class="ink">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-c"/></svg>
+  <div class="wrap">
+    <div class="dim label">01 / The design decision</div>
+    <div class="two">
+      <h2>The app never talks to Plaid.</h2>
+      <p class="lede">Every Plaid call needs a secret, and anything shipped inside an iPhone app can be pulled out of it. So the app holds only its Supabase login. Server functions hold the Plaid secret and each bank's access token, which is stored encrypted with AES-GCM.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <svg class="bp nosys" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  <div class="wrap">
+    <div class="dim label">02 / Data path</div>
+    <h2>From a bank login to a dashboard.</h2>
+    <div class="pipe">
+      <div><span class="label">01 · App</span><b>Connect a bank</b><p>plaid-link-token<br>Plaid Link opens</p></div>
+      <div><span class="label">02 · Server</span><b>Exchange</b><p>public_token → access_token<br>encrypted, AES-GCM</p></div>
+      <div><span class="label">03 · Plaid</span><b>Webhook</b><p>signature verified<br>/transactions/sync</p></div>
+      <div><span class="label">04 · Postgres</span><b>Rules + views</b><p>row-level security<br>dashboard views</p></div>
+      <div><span class="label">05 · iPhone</span><b>Dashboards</b><p>Home · budgets<br>daily heatmap</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="ink">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-b"/></svg>
+  <div class="wrap">
+    <div class="dim label">03 / How it works</div>
+    <h2>Synced, categorized, and locked down.</h2>
+    <ol class="howlist">
+      <li><span class="num">01</span><h3>Three ways to stay synced</h3><p>Plaid's webhook triggers a sync when new transactions are ready. Pull to refresh asks the server to sync first. A scheduled job on my Mac syncs every bank with a job secret, not a login.</p></li>
+      <li><span class="num">02</span><h3>Security rules, tested</h3><p>Postgres row-level security keeps each user to their own rows. The app can change only <code>user_category</code> on a transaction. pgTAP tests cover the rules and the views.</p></li>
+      <li><span class="num">03</span><h3>Dashboard-ready views</h3><p>The app reads views, not raw tables: <code>spending_transactions</code>, <code>daily_spending</code>, <code>monthly_category_spending</code>, and <code>budget_progress</code>.</p></li>
+      <li><span class="num">04</span><h3>Local AI categories</h3><p>Merchant rules run first. A model running in Ollama on my Mac (<code>gemma4:e4b</code>) suggests categories for the rest. Nothing is sent to a cloud AI.</p></li>
+      <li><span class="num">05</span><h3>Ask, on the phone</h3><p>On iOS 26, Ask is a chat with Apple's on-device model. Its tools read my own spending data from Supabase, and the chat stays on the phone.</p></li>
+      <li><span class="num">06</span><h3>Locked on launch</h3><p>Sign in with Apple or email through Supabase Auth, with the session in the Keychain. The app locks with Face ID on launch, with a passcode fallback.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="ink closing">
+  <svg class="bp" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#bp-a"/></svg>
+  <div class="wrap">
+    <div class="dim label">Next</div>
+    <div class="nextp">
+      <div><span class="label moss">Projects / 01</span><br><a class="big" href="school-os.html">← School OS</a></div>
+      <a class="btn" href="../index.html#start">Book a workflow teardown</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap"><p class="sig">PARKER MORRIS / BUILT FOR THE LONG HAUL</p></div>
+</footer>
+<script>
+document.addEventListener('click',e=>{document.querySelectorAll('details.dd[open]').forEach(d=>{if(!d.contains(e.target))d.removeAttribute('open')})});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('details.dd[open]').forEach(d=>d.removeAttribute('open'))});
+</script>
+</body>
+</html>
